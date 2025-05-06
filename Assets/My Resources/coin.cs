@@ -7,7 +7,7 @@ public class coin : MonoBehaviour{
     public AudioClip collectSound;
     private AudioSource audioSource;
     private Rigidbody rb;
-	int coinCount;
+	public int coinCount;
 
     void Start () {
 	    rb = GetComponent<Rigidbody>();
