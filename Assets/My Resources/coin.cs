@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 
 public class coin : MonoBehaviour{
     public AudioClip collectSound;
@@ -18,13 +19,18 @@ public class coin : MonoBehaviour{
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)  {
         if (other.gameObject.CompareTag ("Coin")) {
-            other.transform.root.gameObject.SetActive(false);
+            Destroy(other.transform.parent.gameObject);
             //other.gameObject.SetActive (false);
             coinCount +=1;
             if (collectSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(collectSound);
             }
+        } else if (other.gameObject.CompareTag("Finish")) {
+            PlayerPrefs.SetInt("CoinsCollected", coinCount);
+            PlayerPrefs.SetFloat("CompletionTime", Time.timeSinceLevelLoad);
+
+            SceneManager.LoadScene("FinishScene");
         }
     }
 

@@ -21,7 +21,7 @@ public class DoorOpener : MonoBehaviour
 
     void Update()
     {
-        if (player.coinCount >= requiredCoins)
+        if (!isOpen && player != null && player.coinCount >= requiredCoins)
         {
             isOpen = true;
             targetPosition = closedPosition + openPositionOffset;
